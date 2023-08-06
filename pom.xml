@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.5v1988</groupId>
   <artifactId>appium-flutter-client</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Java binding for appium flutter driver</description>
   <url>https://github.com/5v1988/yaml2feature</url>
@@ -30,7 +30,7 @@
     <developerConnection>scm:git:git@github.com:5v1988/appium-flutter-client.git
     </developerConnection>
     <url>https://github.com/5v1988/appium-flutter-client</url>
-    <tag>1.0.1</tag>
+    <tag>appium-flutter-client-1.0.2</tag>
   </scm>
 
   <properties>
