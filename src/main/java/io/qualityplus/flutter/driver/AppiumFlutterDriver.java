@@ -67,6 +67,16 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
     super(remoteSessionAddress, platformName, automationName);
   }
 
+  /**
+   * <p>This method is used to find element by one of locating strategies such as ByValueKey,
+   * ByText
+   * etc. and value to be used</p>
+   *
+   * @param by    — A type of locating strategy to find
+   * @param using — A value to be used
+   * @return — return a flutter element that matches a given locating type and value
+   */
+
   public FlutterElement findElement(FlutterBy by, String using) {
     FlutterElement element;
     switch (by) {
@@ -121,7 +131,17 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
     }
   }
 
-  public FlutterElement findElementByAncestor(FlutterElement of, FlutterElement matching,
+  /**
+   * A method to find an ancestor flutter element given one of its children flutter elements
+   *
+   * @param of             a child element using which an ancestor is to be found
+   * @param matching       — a target ancestor flutter element that is to be matched
+   * @param matchRoot
+   * @param firstMatchOnly — a boolean value to decide whether to return first match only or not
+   * @return
+   */
+
+  public FlutterElement findAncestorElement(FlutterElement of, FlutterElement matching,
       boolean matchRoot, boolean firstMatchOnly) {
     Map<String, Object> matchIdentifier = new HashMap<>(ImmutableMap.of(
         FINDER_TYPE, FlutterBy.ANCESTOR.toString(),
@@ -136,7 +156,16 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
     return element;
   }
 
-  public FlutterElement findElementByDescendant(FlutterElement of, FlutterElement matching,
+  /**
+   * A method to find an descendant flutter element given one of its ancestor flutter elements
+   * @param of             a child element using which a descendant is to be found
+   * @param matching       — a target descendant flutter element that is to be matched
+   * @param matchRoot
+   * @param firstMatchOnly — a boolean value to decide whether to return first match only or not
+   * @return
+   */
+
+  public FlutterElement findDescendantElement(FlutterElement of, FlutterElement matching,
       boolean matchRoot, boolean firstMatchOnly) {
     Map<String, Object> matchIdentifier = new HashMap<>(ImmutableMap.of(
         FINDER_TYPE, FlutterBy.DESCENDANT.toString(),

@@ -10,10 +10,10 @@ public interface FlutterFinder {
 
   public FlutterElement findElement(FlutterBy by, String using);
 
-  public FlutterElement findElementByAncestor(FlutterElement of, FlutterElement matching,
+  public FlutterElement findAncestorElement(FlutterElement of, FlutterElement matching,
       boolean matchRoot, boolean firstMatchOnly);
 
-  public FlutterElement findElementByDescendant(FlutterElement of, FlutterElement matching,
+  public FlutterElement findDescendantElement(FlutterElement of, FlutterElement matching,
       boolean matchRoot, boolean firstMatchOnly);
 
 }
