@@ -29,14 +29,16 @@ public class FlutterElement extends RemoteWebElement {
         (key, value) -> {
           if (value instanceof String || value instanceof Integer || value instanceof Boolean) {
             tempMap.put(key, new JsonPrimitive(String.valueOf(value)));
-          } else if (value instanceof JsonElement) {
+          }else if (value instanceof Map) {
+            tempMap.put(key, gson.toJson(value));
+          }  else if (value instanceof JsonElement) {
             tempMap.put(key, value);
           } else {
             tempMap.put(key, localInstance);
           }
         });
-    String mapJsonStringify = gson.toJson(tempMap);
-    return Base64.getEncoder().encodeToString(mapJsonStringify.getBytes());
+    String stringifyJson = gson.toJson(tempMap);
+    return Base64.getEncoder().encodeToString(stringifyJson.getBytes());
   }
 
 }
