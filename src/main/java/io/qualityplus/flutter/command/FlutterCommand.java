@@ -30,13 +30,13 @@ public class FlutterCommand {
         || flutterCommand.equals(Command.GET_RENDER_TREE)) {
       return (T) driver.executeScript(flutterCommand.toString());
     } else if (flutterCommand.equals(Command.GET_SEMANTICS_ID) || flutterCommand.equals(
-        Command.WAIT_FOR_ABSENT) || flutterCommand.equals(
-        Command.WAIT_FOR)) {
+        Command.WAIT_FOR_ABSENT)) {
       return (T) driver.executeScript(flutterCommand.toString(), params[0]);
     } else if (flutterCommand.equals(Command.GET_RENDER_OBJECT_DIAGNOSTICS)
         || flutterCommand.equals(Command.SCROLL_INFO_VIEW) || flutterCommand.equals(
         Command.SCROLL) || flutterCommand.equals(
-        Command.SCROLL_UNTIL_VISIBLE)) {
+        Command.SCROLL_UNTIL_VISIBLE)|| flutterCommand.equals(
+        Command.WAIT_FOR)) {
       return (T) driver.executeScript(flutterCommand.toString(), params[0], params[1]);
     } else {
       throw new IllegalStateException("Unexpected flutter command: " + flutterCommand);

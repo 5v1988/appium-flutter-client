@@ -7,7 +7,8 @@ public enum FlutterBy {
   TEXT("ByText"),
   SEMANTICS_LABEL("BySemanticsLabel"),
   ANCESTOR("Ancestor"),
-  DESCENDANT("Descendant");
+  DESCENDANT("Descendant"),
+  PAGE_BACK("PageBack");
 
   private String type;
 

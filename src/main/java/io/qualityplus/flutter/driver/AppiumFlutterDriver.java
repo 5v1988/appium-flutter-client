@@ -69,8 +69,7 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
 
   /**
    * <p>This method is used to find element by one of locating strategies such as ByValueKey,
-   * ByText
-   * etc. and value to be used</p>
+   * ByText etc. and value to be used</p>
    *
    * @param by    — A type of locating strategy to find
    * @param using — A value to be used
@@ -126,6 +125,13 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
         element.setParent(this);
         element.setFileDetector(keys -> null);
         return element;
+      case PAGE_BACK:
+        element = new FlutterElement(ImmutableMap.of(
+            FINDER_TYPE, by.toString()
+        ));
+        element.setParent(this);
+        element.setFileDetector(keys -> null);
+        return element;
       default:
         return null;
     }
@@ -158,6 +164,7 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
 
   /**
    * A method to find an descendant flutter element given one of its ancestor flutter elements
+   *
    * @param of             a child element using which a descendant is to be found
    * @param matching       — a target descendant flutter element that is to be matched
    * @param matchRoot
