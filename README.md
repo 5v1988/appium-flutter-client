@@ -28,12 +28,12 @@ dependency on the project
 <dependency>
     <groupId>io.github.5v1988</groupId>
     <artifactId>appium-flutter-client</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
 ```groovy
-implementation group: 'io.github.5v1988', name: 'appium-flutter-client', version: '1.0.3'
+implementation group: 'io.github.5v1988', name: 'appium-flutter-client', version: '1.0.4'
 ```
 
 Once the above steps are done, Appium Flutter Driver can be instantiated by passing in necessary
