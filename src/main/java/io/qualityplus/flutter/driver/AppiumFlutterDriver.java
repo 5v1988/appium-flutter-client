@@ -3,18 +3,21 @@ package io.qualityplus.flutter.driver;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumClientConfig;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.SupportsContextSwitching;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.qualityplus.flutter.command.FlutterCommand;
+import io.qualityplus.flutter.common.Command;
 import io.qualityplus.flutter.common.FlutterBy;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.http.HttpClient.Factory;
 
-public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
-
+public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder, SupportsContextSwitching {
   public AppiumFlutterDriver(HttpCommandExecutor executor,
       Capabilities capabilities) {
     super(executor, capabilities);
@@ -186,5 +189,50 @@ public class AppiumFlutterDriver extends AppiumDriver implements FlutterFinder {
     element.setFileDetector(keys -> null);
     return element;
   }
+
+  /**
+   * This method is get all available contexts in the current session
+   * @return — Returns all available contexts such as FLUTTER, NATIVE_APP
+   */
+
+  public Set<String> getContexts(){
+    Set<String> contexts = ((SupportsContextSwitching) this).getContextHandles();
+    return contexts;
+  }
+
+  /**
+   * Given the context is valid for the current session, this method helps to switch to the given context
+   * @param to — Namely FLUTTER, NATIVE_APP
+   * Use case: When you want to avail all appium features on Flutter driver, this may come in handy
+   */
+  public void switchToContext(String to) {
+    Set<String> contexts = ((SupportsContextSwitching) this).getContextHandles();
+    for (String context : contexts) {
+      if (context.contains(to)) {
+        ((SupportsContextSwitching) this).context(context);
+        return;
+      }
+    }
+  }
+
+  /**
+   * This renders the current tree of structure of the screen
+   * @return
+   */
+  public String getRenderTree(){
+    return new FlutterCommand(this)
+        .execute(Command.GET_RENDER_TREE).toString();
+  }
+
+  /**
+   * Wait until the given element being passed is visible on the screen
+   * @param el — an element to wait for
+   * @param timeout — a timeout in ms
+   */
+  public void waitFor(FlutterElement el, int timeout){
+    new FlutterCommand(this)
+        .execute(Command.WAIT_FOR, el, timeout);
+  }
+
 }
 

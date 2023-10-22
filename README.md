@@ -28,12 +28,12 @@ dependency on the project
 <dependency>
     <groupId>io.github.5v1988</groupId>
     <artifactId>appium-flutter-client</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
 ```groovy
-implementation group: 'io.github.5v1988', name: 'appium-flutter-client', version: '1.0.3'
+implementation group: 'io.github.5v1988', name: 'appium-flutter-client', version: '1.0.5'
 ```
 
 Once the above steps are done, Appium Flutter Driver can be instantiated by passing in necessary
@@ -93,9 +93,20 @@ private FlutterElement getFirstItemFromList() {
 Using FlutterCommand from this library, you could able to execute them by passing in necessary parameters
 that each command takes in. Status of all implemented Flutter commands can be tracked from [here](https://github.com/appium-userland/appium-flutter-driver)
 
-The below is the snippet to scroll for a flutter element until it's visible on the screen.
+The below are some example snippets to perform certain interactions on the screen.
 
 ```java
+//To scroll for an element in Flutter context
 protected FlutterCommand command = new FlutterCommand(driver);
-command.execute(Command.SCROLL_INFO_VIEW, element, ImmutableMap.of("alignment", 0.1));;
+command.execute(Command.SCROLL_INFO_VIEW, element, ImmutableMap.of("alignment", 0.1));
+
+// To render the tree for the given screen on the flutter app
+String flutterTree = driver.getRenderTree();
+
+//To switch to Native context and find an element using XPath
+driver.switchToContext("NATIVE_APP");
+WebElement signIn = driver.findElement(By.xpath("//*[@content-desc='Sign in']"));
+signIn.click();
+driver.switchToContext("FLUTTER");
+
 ```
